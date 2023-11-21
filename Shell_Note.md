@@ -1,22 +1,62 @@
 # Shell 笔记
-#### 这是一篇关于Bash Shell脚本的笔记
----
+#### 🤣👉 这是一篇关于Bash Shell脚本的笔记
+- [Shell 笔记](#shell-笔记)
+      - [🤣👉 这是一篇关于Bash Shell脚本的笔记](#-这是一篇关于bash-shell脚本的笔记)
+  - [1 简介](#1-简介)
+  - [2 一个最简单的Shell脚本](#2-一个最简单的shell脚本)
+  - [3 变量操作](#3-变量操作)
+    - [I 定义变量](#i-定义变量)
+    - [II 只读变量](#ii-只读变量)
+    - [III 变量调用](#iii-变量调用)
+    - [IV 删除变量](#iv-删除变量)
+  - [4 字符串操作](#4-字符串操作)
+    - [I 字符串定义](#i-字符串定义)
+    - [II 字符串拼接](#ii-字符串拼接)
+    - [III 字符串长度获取](#iii-字符串长度获取)
+    - [IV 提取子字符串](#iv-提取子字符串)
+    - [V 查找子字符串](#v-查找子字符串)
+  - [5 数组](#5-数组)
+    - [I 数组定义](#i-数组定义)
+    - [II 数组读取](#ii-数组读取)
+    - [III 数组长度获取](#iii-数组长度获取)
+    - [IV 关联数组](#iv-关联数组)
+  - [6 Shell 传递参数](#6-shell-传递参数)
+  - [7 基本运算符](#7-基本运算符)
+    - [I 算数运算符](#i-算数运算符)
+    - [II 关系运算符](#ii-关系运算符)
+    - [III 布尔运算符](#iii-布尔运算符)
+    - [IV 字符串运算符](#iv-字符串运算符)
+    - [V 文件测试运算符](#v-文件测试运算符)
+  - [8 条件测试](#8-条件测试)
+  - [9 流程控制](#9-流程控制)
+    - [I If-Else-Fi](#i-if-else-fi)
+    - [II For](#ii-for)
+    - [III While](#iii-while)
+    - [IV Until](#iv-until)
+    - [V Case ... Esac](#v-case--esac)
+    - [VI 循环控制](#vi-循环控制)
+  - [10 输出控制](#10-输出控制)
+    - [I Echo语句](#i-echo语句)
+    - [II Printf](#ii-printf)
+  - [11 函数](#11-函数)
 
+
+---
 ## 1 简介
 - Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。
 - Shell 既是一种命令语言，又是一种程序设计语言。
 - Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。
-
+---
 ## 2 一个最简单的Shell脚本
 ```
 #!/bin/bash
 echo "Hello World!"
 ```
-
 其中 
 - `#!` 是一个约定的标记，它告诉系统这个脚本使用哪一种 Shell解释器来执行。
 - `echo` 命令用于向窗口输出文本。
 
+---
 ## 3 变量操作
 
 ### I 定义变量
@@ -49,6 +89,7 @@ unset var1
 ```
 **unset 命令不能删除只读变量**
 
+---
 ## 4 字符串操作
 
 ### I 字符串定义
@@ -112,7 +153,7 @@ str="it is a Linux Program"
 echo `expr index "$str" io`
 Output: 0
 ```
-
+---
 ## 5 数组
 bash只支持一维数组，并且没有限定数组的大小。
 ```
@@ -177,6 +218,7 @@ site["taobao"]="www.taobao.com"
 ```
 echo ${site["baidu"]}
 ```
+---
 ## 6 Shell 传递参数
 代码如下
 ```
@@ -237,6 +279,7 @@ Shell 传递参数实例！
     </tbody>
 </table>
 
+---
 ## 7 基本运算符
 原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用。
 ### I 算数运算符
@@ -289,6 +332,7 @@ Shell 传递参数实例！
 - -S: 判断某文件是否 socket。
 - -L: 检测文件是否存在并且是一个符号链接。
 
+---
 ## 8 条件测试
 在Shell脚本中各种条件结构和流程控制结构中会存在各种判断比较，然后根据不同的判断结果执行不同的操作或命令，返回的结果通常为真或假
 ```
@@ -318,3 +362,258 @@ test <Expression>
 - 使用-z或者-n来检查长度的时候，没有定义的变量也为0
 - 空变量和没有初始化的变量可能会对shell脚本测试产生灾难性的影响，因此在不确定变量的内容的时候，在测试号前使用-n或者-z测试一下
 - ? 变量包含了之前执行命令的退出状态（最近完成的前台进程）（可以用于检测退出状态）
+
+---
+## 9 流程控制
+Shell 的流程控制不可为<b><span style="color: Red">空</span></b>
+
+### I If-Else-Fi
+与常规的IF-ELSE语句基本相同，IF后接**条件测试**语句
+```
+a=10
+b=20
+if [ $a == $b ]; then
+   echo "a 等于 b"
+elif [ $a -gt $b ]; then
+   echo "a 大于 b"
+elif [ $a -lt $b ]; then
+   echo "a 小于 b"
+else
+   echo "没有符合的条件"
+fi
+```
+
+### II For
+与常规的FOR-EACH语句类似，细节上有些许不同
+```
+for loop in 1 2 3 4 5
+do
+    echo "The value is: $loop"
+done
+
+# Output:
+# The value is: 1
+# The value is: 2
+# The value is: 3
+# The value is: 4
+# The value is: 5
+
+# 字符串处理方式(This is a String)
+for str in This is a string
+do
+    echo $str
+done
+
+# Output:
+# This
+# is
+# a
+# string
+```
+
+### III While
+```
+int=1
+while(( $int<=5 ))
+do
+    echo $int
+    let "int++"
+done
+
+# Let用于执行一个或多个表达式，变量计算中不需要加 $ 来表示变量
+
+# Output: 
+# 1
+# 2
+# 3
+# 4
+# 5
+```
+
+### IV Until
+```
+a=0
+until [ ! $a -lt 10 ]
+do
+   echo $a
+   a=`expr $a + 1`
+done
+
+# Output:
+# 0
+# 1
+# 2
+# 3
+# 4
+# 5
+# 6
+# 7
+# 8
+# 9
+```
+
+### V Case ... Esac
+与 Switch ... Case 语句类似，整体结构为
+```
+case val in
+pattern1)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+pattern2)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+```
+```
+echo '输入 1 到 4 之间的数字:'
+echo '你输入的数字为:'
+read aNum
+case $aNum in
+    1)  echo '你选择了 1'
+    ;;
+    2)  echo '你选择了 2'
+    ;;
+    3)  echo '你选择了 3'
+    ;;
+    4)  echo '你选择了 4'
+    ;;
+    *)  echo '你没有输入 1 到 4 之间的数字'
+    ;;
+esac
+
+# Output:
+# 输入 1 到 4 之间的数字:
+# 你输入的数字为:
+# 2
+# 你选择了 2
+```
+
+### VI 循环控制
+- Break 跳出所有循环
+- Continue 跳出当前循环
+
+---
+## 10 输出控制
+### I Echo语句
+类似PHP 的 `echo` ，用于输出语句
+`Echo` 后可加入
+- -n 不换行输出
+- -e 启用反斜线转义解释
+- -E 禁用反斜线转义解释（默认）
+
+### II Printf
+类似C的printf()
+```
+printf  format-string  [arguments...]
+```
+<table>
+    <thead>
+        <tr>
+            <td>序列</td>
+            <td>说明</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>\a</td>
+            <td>警告字符，通常为ASCII的BEL字符</td>
+        </tr>
+        <tr>
+            <td>\b</td>
+            <td>后退</td>
+        </tr>
+        <tr>
+            <td>\c</td>
+            <td>抑制（不显示）输出结果中任何结尾的换行字符（只在%b格式指示符控制下的参数字符串中有效），而且，任何留在参数里的字符、任何接下来的参数以及任何留在格式字符串中的字符，都被忽略</td>
+        </tr>
+        <tr>
+            <td>\f</td>
+            <td>换页（formfeed）</td>
+        </tr>
+        <tr>
+            <td>\n</td>
+            <td>换行</td>
+        </tr>
+        <tr>
+            <td>\r</td>
+            <td>回车（Carriage return）</td>
+        </tr>
+        <tr>
+            <td>\t</td>
+            <td>水平制表符</td>
+        </tr>
+        <tr>
+            <td>\v</td>
+            <td>垂直制表符</td>
+        </tr>
+        <tr>
+            <td>\\</td>
+            <td>一个字面上的反斜杠字符</td>
+        </tr>
+        <tr>
+            <td>\ddd</td>
+            <td>表示1到3位数八进制值的字符。仅在格式字符串中有效</td>
+        </tr>
+        <tr>
+            <td>\0ddd</td>
+            <td>表示1到3位的八进制值字符</td>
+        </tr>
+    </tbody>
+</table>
+
+---
+## 11 函数
+与其他编程语言类似，基本写法为
+```
+[ function ] funname [()]
+{
+    action;
+    [return int;]
+}
+```
+
+- 可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。
+- 参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n
+
+```
+demoFun(){
+    echo "这是我的第一个 Shell 函数!"
+}
+echo "-----函数开始执行-----"
+demoFun
+echo "-----函数执行完毕-----"
+
+# Output:
+# -----函数开始执行-----
+# 这是我的第一个 Shell 函数!
+# -----函数执行完毕-----
+
+funWithReturn(){
+    echo "这个函数会对输入的两个数字进行相加运算..."
+    echo "输入第一个数字: "
+    read aNum
+    echo "输入第二个数字: "
+    read anotherNum
+    echo "两个数字分别为 $aNum 和 $anotherNum !"
+    return $(($aNum+$anotherNum))
+}
+funWithReturn
+echo "输入的两个数字之和为 $? !"
+
+# Output:
+# 这个函数会对输入的两个数字进行相加运算...
+# 输入第一个数字: 
+# 1
+# 输入第二个数字: 
+# 2
+# 两个数字分别为 1 和 2 !
+# 输入的两个数字之和为 3 !
+```
+
+**`$?` 仅对其上一条指令负责，一旦函数返回后其返回值没有立即保存入参数，那么其返回值将不再能通过 `\$?` 获得。**
