@@ -53,6 +53,7 @@
 #!/bin/bash
 echo "Hello World!"
 ```
+![2-1](./img/2_1.png)
 其中 
 - `#!` 是一个约定的标记，它告诉系统这个脚本使用哪一种 Shell解释器来执行。
 - `echo` 命令用于向窗口输出文本。
@@ -126,7 +127,7 @@ str5='hello, ${str1} !'
 echo $str4  $str5
 # Output: hello, Neusoft ! hello, ${str1} !
 ```
-
+![4-1](./img/4-1.png)
 
 ### III 字符串长度获取
 ```
@@ -139,7 +140,7 @@ str="abcde"
 echo ${#str[0]}
 # Output: 5
 ```
-
+![4-2](./img/4_2.png)
 ### IV 提取子字符串
 ```
 str="it is a Linux Program"
@@ -244,7 +245,7 @@ Shell 传递参数实例！
 第二个参数为：2
 第三个参数为：3
 ```
-
+![6-1](./img/6_1.png)
 <table style='text-align: center'>
     <thead>
         <tr>
@@ -411,7 +412,7 @@ done
 # a
 # string
 ```
-
+![9-1](./img/9_1.png)
 ### III While
 ```
 int=1
@@ -452,7 +453,7 @@ done
 # 8
 # 9
 ```
-
+![9-2](./img/9_2.png)
 ### V Case ... Esac
 与 Switch ... Case 语句类似，整体结构为
 ```
@@ -494,7 +495,7 @@ esac
 # 2
 # 你选择了 2
 ```
-
+![10-1](./img/10_1.png)
 ### VI 循环控制
 - Break 跳出所有循环
 - Continue 跳出当前循环
@@ -616,5 +617,5 @@ echo "输入的两个数字之和为 $? !"
 # 两个数字分别为 1 和 2 !
 # 输入的两个数字之和为 3 !
 ```
-
+![11-1](./img/11_1.png)
 **`$?` 仅对其上一条指令负责，一旦函数返回后其返回值没有立即保存入参数，那么其返回值将不再能通过 `\$?` 获得。**
